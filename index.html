@@ -1,0 +1,1827 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lone State Builders Co — Commercial & Residential Doors, Hardware, and General Building. All of Texas.</title>
+<meta name="description" content="Commercial and residential doors, frames, hardware, and general building services across Texas. Platinum-tier dealer for ASSA ABLOY and Tell Manufacturing. Upload your blueprints for a bid." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =============================================================================
+   Lone State Builders Co — landing page
+   Palette: bone / ink / steel + terracotta accent
+============================================================================= */
+
+:root{
+  --bone:        #EFEAE1;
+  --bone-2:      #E6E0D4;
+  --paper:       #F6F2EA;
+  --ink:         #141210;
+  --ink-2:       #1E1B17;
+  --graphite:    #2A2620;
+  --steel:       #5B564C;
+  --stone:       #8A8478;
+  --line:        #D6CFC0;
+  --line-dk:     #2B2721;
+
+  --accent:      #C4552A;   /* burnt terracotta */
+  --accent-dk:   #A9431F;
+  --accent-tint: #F1DACB;
+
+  --blueprint-bg: #0E2B3E;
+  --blueprint-ln: #9FC7DE;
+
+  --radius:      2px;
+  --radius-lg:   6px;
+
+  --serif:       "Fraunces", "Iowan Old Style", Georgia, serif;
+  --sans:        "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:        "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --maxw:        1320px;
+  --pad-x:       clamp(20px, 4vw, 72px);
+}
+
+*,*::before,*::after{ box-sizing: border-box; }
+html,body{ margin:0; padding:0; }
+html{ scroll-behavior: smooth; }
+body{
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { display:block; max-width:100%; }
+
+h1,h2,h3,h4{ font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; margin:0; color:var(--ink); }
+h1{ font-size: clamp(44px, 6.2vw, 96px); line-height: 0.98; letter-spacing: -0.02em; }
+h2{ font-size: clamp(34px, 4.2vw, 62px); line-height: 1.02; letter-spacing: -0.02em; }
+h3{ font-size: clamp(18px, 1.4vw, 22px); line-height: 1.2; }
+p { margin: 0 0 1em; text-wrap: pretty; }
+em { font-style: italic; color: var(--accent-dk); }
+
+.section-title{ max-width: 18ch; margin-bottom: 48px; }
+
+.eyebrow{
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 18px;
+}
+
+/* ========================================================= NAV ============ */
+.nav{
+  position: sticky; top:0; z-index: 30;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 16px var(--pad-x);
+  background: rgba(246,242,234,.88);
+  backdrop-filter: saturate(1.2) blur(10px);
+  -webkit-backdrop-filter: saturate(1.2) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav__brand{
+  display:flex; align-items:center; gap:10px;
+  text-decoration:none; color:var(--ink);
+}
+.mark{ color: var(--ink); display:inline-flex; }
+.brand-text{ display:flex; flex-direction:column; line-height:1; }
+.brand-text__a{ font-family: var(--serif); font-size: 18px; letter-spacing:-.01em; }
+.brand-text__b{ font-family: var(--mono); font-size: 10px; letter-spacing:.12em; color:var(--steel); text-transform:uppercase; margin-top:3px; }
+
+.nav__links{
+  display:flex; gap: 26px; justify-content:center;
+}
+.nav__links a{
+  text-decoration:none;
+  color: var(--ink-2);
+  font-size: 14px;
+  font-weight: 500;
+  opacity: .78;
+  transition: opacity .15s ease, color .15s ease;
+}
+.nav__links a:hover{ opacity:1; color: var(--accent); }
+
+/* ==================================================== BUTTONS ============= */
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .01em;
+  text-decoration:none;
+  cursor: pointer;
+  transition: transform .08s ease, background .15s ease, color .15s ease, border-color .15s ease;
+}
+.btn:active{ transform: translateY(1px); }
+.btn--primary{ background: var(--ink); color: var(--paper); }
+.btn--primary:hover{ background: var(--accent); color: #fff; }
+.btn--ghost{ background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn--ghost:hover{ background: var(--ink); color: var(--paper); }
+.btn--pill{ border-radius: 999px; padding: 10px 16px; background: var(--ink); color: var(--paper); font-size: 13px; }
+.btn--pill:hover{ background: var(--accent); }
+.btn--lg{ padding: 16px 26px; font-size: 15px; }
+.nav__cta{ justify-self: end; }
+
+/* ====================================================== HERO ============== */
+.hero{
+  padding: clamp(56px, 9vw, 120px) var(--pad-x) 64px;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  position: relative;
+}
+.hero__meta{ display:flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+.chip{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-2);
+  background: var(--bone);
+  border: 1px solid var(--line);
+  padding: 7px 12px;
+  border-radius: 999px;
+}
+.chip--ghost{ background: transparent; }
+.chip__dot{ width:6px; height:6px; border-radius:50%; background: var(--accent); box-shadow:0 0 0 3px rgba(196,85,42,.18); }
+
+.hero__title{
+  max-width: 18ch;
+  margin-bottom: 28px;
+}
+.hero__lede{
+  max-width: 60ch;
+  font-size: clamp(17px, 1.4vw, 20px);
+  color: var(--graphite);
+  line-height: 1.55;
+  margin-bottom: 32px;
+}
+.hero__actions{
+  display:flex; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.hero__stats{
+  margin: 0 0 56px;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.hero__stats > div{ display:flex; flex-direction: column; gap: 6px; }
+.hero__stats dt{
+  font-family: var(--mono); font-size: 11px; letter-spacing:.12em; text-transform: uppercase; color: var(--steel);
+}
+.hero__stats dd{
+  margin:0;
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1;
+  letter-spacing:-.02em;
+}
+.hero__stats dd span{ color: var(--accent); }
+
+/* ==================== Scope showcase (doors typology grid) ==================== */
+.scope{
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--bone);
+  box-shadow: 0 30px 60px -30px rgba(20,18,16,.35);
+}
+.scope__head{
+  display:flex; justify-content: space-between; align-items:center;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(239,234,225,.12);
+  background: var(--ink-2);
+  gap: 16px; flex-wrap: wrap;
+}
+.scope__eyebrow, .scope__meta{
+  font-family: var(--mono); font-size: 10.5px; letter-spacing:.14em; text-transform: uppercase;
+}
+.scope__eyebrow{ color: var(--accent); }
+.scope__meta{ color: rgba(239,234,225,.55); }
+.scope__grid{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.scope__cell{
+  padding: 24px 20px 22px;
+  border-right: 1px solid rgba(239,234,225,.1);
+  display:flex; flex-direction: column;
+  position: relative;
+}
+.scope__cell:last-child{ border-right: none; }
+.scope__n{
+  font-family: var(--mono); font-size: 10px; letter-spacing:.14em; color: rgba(239,234,225,.35);
+  margin-bottom: 10px;
+}
+.scope__art{
+  width: 100%; aspect-ratio: 4/3;
+  color: var(--bone);
+  margin-bottom: 14px;
+  opacity: .95;
+  shape-rendering: geometricPrecision;
+}
+.scope__label{
+  font-family: var(--serif); font-size: 17px; font-weight: 500;
+  color: var(--bone);
+  line-height: 1.2;
+  margin-bottom: 4px;
+  letter-spacing: -.01em;
+}
+.scope__sub{
+  font-family: var(--mono); font-size: 10px; letter-spacing:.06em;
+  color: rgba(239,234,225,.5);
+  text-transform: uppercase;
+  line-height: 1.45;
+}
+.scope__foot{
+  display:flex; justify-content: space-between; align-items:center;
+  padding: 14px 20px;
+  border-top: 1px solid rgba(239,234,225,.12);
+  background: var(--ink-2);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing:.1em; text-transform: uppercase;
+  color: rgba(239,234,225,.6);
+  gap: 16px; flex-wrap: wrap;
+}
+.scope__foot-r{ color: var(--accent); }
+
+@media (max-width: 1024px){
+  .scope__grid{ grid-template-columns: repeat(3, 1fr); }
+  .scope__cell:nth-child(3){ border-right: none; }
+  .scope__cell:nth-child(-n+3){ border-bottom: 1px solid rgba(239,234,225,.1); }
+}
+@media (max-width: 640px){
+  .scope__grid{ grid-template-columns: repeat(2, 1fr); }
+  .scope__cell{ border-right: 1px solid rgba(239,234,225,.1) !important; }
+  .scope__cell:nth-child(2n){ border-right: none !important; }
+  .scope__cell:not(:nth-last-child(-n+2)){ border-bottom: 1px solid rgba(239,234,225,.1); }
+}
+
+/* ==================================================== UPLOAD ============== */
+.upload{
+  background: var(--ink);
+  color: var(--bone);
+  padding: clamp(72px, 9vw, 120px) var(--pad-x);
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+.upload .eyebrow{ color: rgba(239,234,225,.55); }
+.upload h2{ color: var(--bone); }
+.upload__copy p{ color: rgba(239,234,225,.8); font-size: 17px; max-width: 40ch; margin-top: 24px; }
+.upload__copy strong{ color: var(--bone); font-weight: 600; }
+
+.upload__bullets{ list-style:none; padding:0; margin: 24px 0 0; display:flex; flex-direction: column; gap: 10px; }
+.upload__bullets li{ display:flex; align-items:center; gap:10px; color: rgba(239,234,225,.85); font-size: 14px; }
+.tick{
+  width:18px; height:18px; border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  background: var(--accent); color:#fff;
+  font-size: 11px; font-weight: 700;
+}
+
+.upload__form{
+  background: var(--graphite);
+  border: 1px solid rgba(239,234,225,.08);
+  border-radius: var(--radius-lg);
+  padding: clamp(22px, 2.4vw, 36px);
+  display:flex; flex-direction: column; gap: 14px;
+}
+.row{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field{ display:flex; flex-direction: column; gap: 6px; }
+.field > span{
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(239,234,225,.55);
+}
+.field i{ color: var(--accent); font-style: normal; margin-left: 3px; }
+.field input, .field select, .field textarea{
+  background: var(--ink-2);
+  border: 1px solid rgba(239,234,225,.12);
+  color: var(--bone);
+  padding: 12px 14px;
+  font-family: var(--sans);
+  font-size: 15px;
+  border-radius: var(--radius);
+  transition: border-color .15s ease, background .15s ease;
+  width: 100%;
+}
+.field textarea{ resize: vertical; min-height: 80px; }
+.field input:focus, .field select:focus, .field textarea:focus{
+  outline: none;
+  border-color: var(--accent);
+  background: var(--ink);
+}
+.field select{ appearance:none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 20 20'><path fill='none' stroke='%23a39c8c' stroke-width='1.6' d='M5 8l5 5 5-5'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+/* Dropzone */
+.dropzone{
+  margin-top: 8px;
+  border: 1.5px dashed rgba(239,234,225,.25);
+  border-radius: var(--radius-lg);
+  background: repeating-linear-gradient(45deg, rgba(239,234,225,.015) 0 10px, transparent 10px 20px), var(--ink-2);
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, transform .1s ease;
+}
+.dropzone:hover, .dropzone:focus-visible{
+  border-color: var(--accent);
+  outline: none;
+  background: repeating-linear-gradient(45deg, rgba(196,85,42,.06) 0 10px, transparent 10px 20px), var(--ink-2);
+}
+.dropzone.is-drag{
+  border-color: var(--accent);
+  background: rgba(196,85,42,.08);
+  transform: scale(1.005);
+}
+.dropzone__icon{ color: rgba(239,234,225,.6); display:flex; justify-content:center; margin-bottom: 12px; }
+.dropzone__title{ font-family: var(--serif); font-size: 22px; color: var(--bone); margin-bottom: 6px; }
+.dropzone__sub{ font-size: 13px; color: rgba(239,234,225,.6); }
+.linkish{ background:none; border:none; color: var(--accent); text-decoration: underline; cursor:pointer; font: inherit; padding: 0; }
+
+/* File list */
+.filelist{ list-style:none; padding:0; margin: 4px 0 0; display:flex; flex-direction:column; gap: 8px; }
+.filelist li{
+  display:grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 14px;
+  align-items:center;
+  background: var(--ink-2);
+  border: 1px solid rgba(239,234,225,.08);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+.filelist .ficon{
+  width: 34px; height: 34px; border-radius: 4px;
+  background: rgba(196,85,42,.14); color: var(--accent);
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--mono); font-size: 10px; font-weight:600;
+  letter-spacing: .06em;
+}
+.filelist .fmeta{ display:flex; flex-direction: column; min-width: 0; }
+.filelist .fname{ color: var(--bone); font-weight: 500; white-space: nowrap; overflow:hidden; text-overflow: ellipsis; }
+.filelist .fsub{ color: rgba(239,234,225,.5); font-family: var(--mono); font-size: 11px; letter-spacing: .04em; }
+.filelist .fsub.err{ color: #ff9076; }
+.filelist .fsub.ok{ color: #8fd29a; }
+.filelist .fprog{
+  width: 120px; height: 4px; background: rgba(239,234,225,.1); border-radius: 2px; overflow: hidden;
+}
+.filelist .fprog > span{ display:block; height: 100%; width: 0; background: var(--accent); transition: width .3s ease; }
+.filelist .frm{
+  background: none; border: none; color: rgba(239,234,225,.5); cursor: pointer;
+  padding: 4px 6px; border-radius: 3px;
+}
+.filelist .frm:hover{ background: rgba(239,234,225,.08); color: var(--bone); }
+
+.upload__actions{
+  display:flex; justify-content: space-between; align-items:center; gap: 18px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.upload__status{ font-family: var(--mono); font-size: 12px; color: rgba(239,234,225,.6); }
+.upload__status.err{ color: #ff9076; }
+.upload__status.ok{ color: #8fd29a; }
+.upload__fine{ font-size: 12px; color: rgba(239,234,225,.45); margin: 6px 0 0; }
+
+.btn--primary.upload__btn{ background: var(--accent); color: #fff; }
+.btn--primary.upload__btn:hover{ background: var(--accent-dk); }
+#submit-btn{ background: var(--accent); color: #fff; }
+#submit-btn:hover{ background: var(--accent-dk); }
+#submit-btn:disabled{ opacity: .5; cursor: not-allowed; }
+
+/* ==================================================== SERVICES =========== */
+.services{
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 140px) var(--pad-x);
+}
+.services__grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.service{
+  padding: 32px 28px 36px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display:flex; flex-direction:column; gap: 10px;
+  background: var(--paper);
+  transition: background .2s ease;
+}
+.service:hover{ background: var(--bone); }
+.service__num{
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--accent);
+  margin-bottom: 8px;
+}
+.service h3{ margin-bottom: 4px; font-family: var(--serif); font-weight: 500; font-size: 22px; }
+.service p{ color: var(--graphite); font-size: 15px; line-height: 1.5; margin-bottom: 8px; }
+.service ul{ list-style: none; padding:0; margin: 0; display:flex; flex-direction: column; gap: 4px; }
+.service ul li{ font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--steel); }
+.service ul li::before{ content:"— "; color: var(--stone); }
+
+/* ================================================= CREDENTIALS =========== */
+.creds{
+  background: var(--bone);
+  padding: clamp(80px, 10vw, 140px) var(--pad-x);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+.creds__left p{ color: var(--graphite); font-size: 17px; max-width: 46ch; margin-top: 16px; }
+.creds__right{ display:flex; flex-direction: column; gap: 16px; }
+.cred-card{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 24px;
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+}
+.cred-card::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width: 4px; background: var(--accent);
+}
+.cred-card__row{
+  display:flex; justify-content: space-between;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.cred-card__tier{ color: var(--accent); }
+.cred-card__id{ color: var(--steel); }
+.cred-card__brand{
+  font-family: var(--serif); font-size: 30px; letter-spacing: -.02em; line-height: 1;
+  margin-bottom: 18px;
+}
+.cred-card__meta{ display:grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.cred-card__meta span{ display:block; font-family: var(--mono); font-size: 10px; letter-spacing:.12em; text-transform: uppercase; color: var(--steel); margin-bottom: 4px;}
+.cred-card__meta b{ font-weight: 500; font-size: 13px; color: var(--ink); }
+
+.cred-strip{
+  display:grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; padding: 24px; background: var(--paper); border: 1px solid var(--line);
+}
+.cred-strip > div{ display:flex; flex-direction: column; gap: 4px; }
+.cred-strip b{ font-family: var(--serif); font-weight: 500; font-size: 30px; line-height: 1; letter-spacing:-.02em; }
+.cred-strip span{ font-family: var(--mono); font-size: 10.5px; letter-spacing:.1em; text-transform: uppercase; color: var(--steel); }
+
+/* =================================================== PROJECTS ============ */
+.projects{
+  /* container — kept from before */
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 140px) var(--pad-x);
+}
+.projects__grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.proj{
+  background: linear-gradient(180deg, #242018 0%, #17130F 100%);
+  border: 1px solid #2B2620;
+  border-radius: 12px;
+  padding: 30px 28px 28px;
+  display:flex; flex-direction:column; gap: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.proj::before{
+  content:"";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 85% 0%, rgba(255,255,255,.06), transparent 45%),
+    linear-gradient(135deg, rgba(255,255,255,.03), transparent 60%);
+  pointer-events: none;
+}
+.proj:hover{
+  transform: translateY(-2px);
+  border-color: #3E382F;
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,.5);
+}
+.proj__emoji{
+  width: 56px; height: 56px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #F2ECDF 0%, #D9D2C2 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-size: 30px;
+  line-height: 1;
+  margin-bottom: 4px;
+  position: relative;
+  box-shadow: 0 2px 0 rgba(255,255,255,.06) inset, 0 -1px 0 rgba(0,0,0,.2) inset;
+  filter: grayscale(100%) contrast(1.05);
+}
+.proj__tag{
+  font-family: var(--mono); font-size: 10px; letter-spacing:.14em;
+  text-transform: uppercase;
+  color: rgba(239,234,225,.4);
+  position: relative;
+  margin-bottom: -4px;
+}
+.proj h3{
+  font-family: var(--serif); font-size: 22px; font-weight: 500;
+  color: var(--bone) !important;
+  letter-spacing: -.015em;
+  margin: 4px 0 0;
+  position: relative;
+}
+.proj p{
+  color: rgba(239,234,225,.78) !important;
+  font-size: 14.5px;
+  line-height: 1.55;
+  margin: 0;
+  position: relative;
+}
+.proj__img{
+  display: none;
+  aspect-ratio: 4 / 3;
+  background:
+    repeating-linear-gradient(135deg, rgba(42,38,32,.08) 0 6px, transparent 6px 14px),
+    linear-gradient(135deg, #D8CFBD, #B8AE9A);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  display:flex; align-items:end; padding: 14px;
+}
+.proj__img--b{ background: repeating-linear-gradient(135deg, rgba(42,38,32,.1) 0 6px, transparent 6px 14px), linear-gradient(135deg,#CFCAB9, #9CAA95); }
+.proj__img--c{ background: repeating-linear-gradient(135deg, rgba(42,38,32,.09) 0 6px, transparent 6px 14px), linear-gradient(135deg,#D8B9A0, #A87F60); }
+.proj__img--d{ background: repeating-linear-gradient(135deg, rgba(42,38,32,.08) 0 6px, transparent 6px 14px), linear-gradient(135deg,#C6BCA4, #8B8473); }
+.proj__img--e{ background: repeating-linear-gradient(135deg, rgba(42,38,32,.08) 0 6px, transparent 6px 14px), linear-gradient(135deg,#E0D4BD, #B0A48A); }
+.proj__img--f{ background: repeating-linear-gradient(135deg, rgba(42,38,32,.1) 0 6px, transparent 6px 14px), linear-gradient(135deg,#B7ADA0, #7A7165); }
+.proj__img::after{
+  content: attr(data-label);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  background: rgba(20,18,16,.78); color: var(--bone);
+  padding: 5px 8px;
+}
+
+/* ==================================================== PROCESS ============ */
+.process{
+  background: var(--ink);
+  color: var(--bone);
+  padding: clamp(80px, 10vw, 140px) var(--pad-x);
+}
+.process > .eyebrow{ color: rgba(239,234,225,.5); max-width: var(--maxw); margin: 0 auto 18px; }
+.process > h2{ color: var(--bone); max-width: var(--maxw); margin: 0 auto 48px; }
+.process__list{
+  max-width: var(--maxw); margin: 0 auto;
+  list-style: none; padding: 0;
+  border-top: 1px solid rgba(239,234,225,.12);
+}
+.process__list li{
+  display: grid;
+  grid-template-columns: 80px 1fr 160px;
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(239,234,225,.12);
+  align-items: baseline;
+}
+.process__n{
+  font-family: var(--serif); font-size: 44px; color: var(--accent); line-height: 1;
+}
+.process__body h3{ font-family: var(--serif); font-weight: 500; color: var(--bone); font-size: 24px; margin-bottom: 6px; }
+.process__body p{ color: rgba(239,234,225,.7); max-width: 60ch; margin: 0; font-size: 15px; }
+.process__meta{
+  font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(239,234,225,.5); text-align: right;
+}
+
+/* ==================================================== COVERAGE =========== */
+.coverage{
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 140px) var(--pad-x);
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.coverage__copy p{ color: var(--graphite); font-size: 17px; max-width: 40ch; margin-top: 16px; }
+.coverage__cities{
+  list-style:none; padding: 0; margin: 32px 0 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px;
+}
+.coverage__cities li{
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em;
+  color: var(--ink-2);
+  display:flex; justify-content: space-between; align-items:center;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.coverage__cities li span{
+  font-size: 10px; letter-spacing: .14em; color: var(--accent);
+}
+.coverage__map{
+  color: var(--ink-2);
+  background: var(--bone);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  aspect-ratio: 1 / 1;
+}
+.coverage__map svg{ width: 100%; height: 100%; }
+.pin .pin__ring{
+  fill: none; stroke: var(--accent); stroke-width: 1.5;
+  transform-origin: center; transform-box: fill-box;
+  animation: pulse 2.4s ease-out infinite;
+  opacity: 0;
+}
+.pin .pin__ring:nth-child(2){ animation-delay: 1.2s; }
+@keyframes pulse {
+  0%   { transform: scale(.4); opacity: .8; }
+  80%  { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* ===================================================== CONTACT =========== */
+.contact{
+  background: var(--accent);
+  color: var(--bone);
+  padding: clamp(80px, 10vw, 140px) var(--pad-x);
+}
+.contact .eyebrow{ color: rgba(255,255,255,.6); max-width: var(--maxw); margin: 0 auto 18px; }
+.contact h2{ color: var(--bone); }
+.contact__lede{ color: rgba(255,255,255,.85); font-size: 18px; max-width: 40ch; }
+.contact__grid{
+  max-width: var(--maxw); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(40px, 6vw, 96px); align-items: start;
+}
+.contact__cards{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.contact-card{
+  background: rgba(0,0,0,.15);
+  border: 1px solid rgba(255,255,255,.2);
+  padding: 22px;
+  display:flex; flex-direction: column; gap: 6px;
+  text-decoration: none; color: var(--bone);
+  border-radius: var(--radius);
+  transition: background .15s ease, border-color .15s ease;
+}
+a.contact-card:hover{ background: rgba(0,0,0,.28); border-color: rgba(255,255,255,.4); }
+.contact-card__k{ font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+.contact-card__v{ font-family: var(--serif); font-size: 22px; line-height: 1.2; }
+
+/* ===================================================== FOOTER ============ */
+.foot{
+  background: var(--ink);
+  color: var(--bone);
+  padding: 64px var(--pad-x) 40px;
+}
+.foot__top{
+  max-width: var(--maxw); margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: start; gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(239,234,225,.12);
+  flex-wrap: wrap;
+}
+.foot__brand{ display:flex; gap: 12px; align-items: start; }
+.foot__brand .mark{ color: var(--bone); padding-top: 2px; }
+.foot__name{ font-family: var(--serif); font-size: 20px; }
+.foot__tag{ font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: rgba(239,234,225,.55); margin-top: 4px; }
+.foot__links{ display:flex; gap: 24px; flex-wrap: wrap; }
+.foot__links a{ color: rgba(239,234,225,.75); text-decoration: none; font-size: 14px; }
+.foot__links a:hover{ color: var(--accent); }
+.foot__bottom{
+  max-width: var(--maxw); margin: 0 auto;
+  display:flex; justify-content: space-between; gap: 24px;
+  padding-top: 32px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: rgba(239,234,225,.5);
+  text-transform: uppercase;
+  flex-wrap: wrap;
+}
+
+/* ===================================================== TOAST ============ */
+.toast{
+  position: fixed; bottom: 24px; right: 24px; z-index: 80;
+  background: var(--ink); color: var(--bone);
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(239,234,225,.12);
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,.5);
+  transform: translateY(20px); opacity: 0; pointer-events: none;
+  transition: transform .25s ease, opacity .25s ease;
+  max-width: 360px;
+}
+.toast.is-on{ transform: translateY(0); opacity: 1; }
+.toast.is-ok{ border-color: rgba(143,210,154,.5); }
+.toast.is-err{ border-color: rgba(255,144,118,.5); }
+
+/* ===================================================== RESPONSIVE ======== */
+@media (max-width: 1024px){
+  .nav__links{ display: none; }
+  .upload{ grid-template-columns: 1fr; }
+  .services__grid{ grid-template-columns: repeat(2, 1fr); }
+  .creds{ grid-template-columns: 1fr; }
+  .projects__grid{ grid-template-columns: repeat(2, 1fr); }
+  .coverage{ grid-template-columns: 1fr; }
+  .contact__grid{ grid-template-columns: 1fr; }
+  .process__list li{ grid-template-columns: 60px 1fr; }
+  .process__meta{ grid-column: 2; text-align: left; margin-top: 4px; }
+  .hero__stats{ grid-template-columns: repeat(2,1fr); gap: 20px; }
+}
+@media (max-width: 640px){
+  .row{ grid-template-columns: 1fr; }
+  .services__grid{ grid-template-columns: 1fr; }
+  .projects__grid{ grid-template-columns: 1fr; }
+  .cred-card__meta{ grid-template-columns: 1fr; gap: 8px; }
+  .cred-strip{ grid-template-columns: 1fr; }
+  .contact__cards{ grid-template-columns: 1fr; }
+  .coverage__cities{ grid-template-columns: 1fr; }
+  .blueprint__tag--r{ display:none; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ────────────────────────────────────────────────────────────────── NAV ── -->
+<header class="nav" data-screen-label="Landing">
+  <a class="nav__brand" href="#top" aria-label="Lone State Builders, home">
+    <span class="mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="28" height="28"><path fill="currentColor" d="M16 2 L29 9 V23 L16 30 L3 23 V9 Z M16 6 L7 11 V21 L16 26 L25 21 V11 Z"/><path fill="currentColor" d="M14 11 H18 V21 H14 Z"/></svg>
+    </span>
+    <span class="brand-text">
+      <span class="brand-text__a">Lone State</span>
+      <span class="brand-text__b">Builders Co.</span>
+    </span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#services">Services</a>
+    <a href="#credentials">Why us</a>
+    <a href="#projects">Projects</a>
+    <a href="#process">Process</a>
+    <a href="#coverage">Coverage</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="btn btn--pill nav__cta" href="#upload">
+    <span>Upload blueprints</span>
+    <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4 10h12M11 5l5 5-5 5"/></svg>
+  </a>
+</header>
+
+<main id="top">
+
+<!-- ─────────────────────────────────────────────────────────────── HERO ── -->
+<section class="hero">
+  <div class="hero__meta">
+    <span class="chip"><span class="chip__dot"></span>Est. 2026 · Sugar Land, TX</span>
+    <span class="chip chip--ghost">Serving all of Texas</span>
+  </div>
+
+  <h1 class="hero__title">
+    Commercial doors,<br/>
+    hardware &amp; <em>general building</em><br/>
+    — built for Texas.
+  </h1>
+
+  <p class="hero__lede">
+    We supply and install hollow-metal doors, frames, and finish hardware, and take on
+    full-scope general building for hospitals, surgical centers, schools, and commercial
+    properties. A decade of field experience, Platinum-tier vendor pricing, crews based
+    in Houston and Dallas.
+  </p>
+
+  <div class="hero__actions">
+    <a class="btn btn--primary" href="#upload">
+      <span>Upload blueprints for a bid</span>
+      <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 10h12M11 5l5 5-5 5"/></svg>
+    </a>
+    <a class="btn btn--ghost" href="tel:+18186690985">
+      <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M5 3h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>
+      <span>818-669-0985</span>
+    </a>
+  </div>
+
+  <!-- Hero metrics strip -->
+  <dl class="hero__stats" aria-label="At a glance">
+    <div><dt>Years in trade</dt><dd>10<span>+</span></dd></div>
+    <div><dt>States delivered</dt><dd>3</dd></div>
+    <div><dt>Vendor tier</dt><dd>Platinum</dd></div>
+    <div><dt>Texas crew hubs</dt><dd>2</dd></div>
+  </dl>
+
+  <!-- Scope showcase — what we actually build -->
+  <figure class="scope" aria-label="What we build">
+    <div class="scope__head">
+      <span class="scope__eyebrow">Scope · Commercial · Residential · General Building</span>
+      <span class="scope__meta">TX · CA · AR · Delivered.</span>
+    </div>
+    <div class="scope__grid">
+
+      <!-- 01 — Commercial storefront entry (elevation) -->
+      <article class="scope__cell">
+        <div class="scope__n">01</div>
+        <svg viewBox="0 0 400 300" class="scope__art" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <g fill="none" stroke="currentColor" stroke-linecap="square">
+            <rect x="30" y="40" width="340" height="30" stroke-width="3"/>
+            <rect x="30" y="70" width="340" height="200" stroke-width="3"/>
+            <rect x="195" y="70" width="10" height="200" fill="currentColor" opacity=".85"/>
+            <rect x="40" y="80" width="150" height="180" stroke-width="1.5"/>
+            <rect x="50" y="90" width="130" height="160" stroke-width="1" opacity=".6"/>
+            <rect x="210" y="80" width="150" height="180" stroke-width="1.5"/>
+            <rect x="220" y="90" width="130" height="160" stroke-width="1" opacity=".6"/>
+            <rect x="170" y="150" width="4" height="60" fill="currentColor"/>
+            <rect x="226" y="150" width="4" height="60" fill="currentColor"/>
+            <line x1="15" y1="272" x2="385" y2="272" stroke-width="2"/>
+            <line x1="15" y1="278" x2="385" y2="278" stroke-width="1" opacity=".5"/>
+          </g>
+        </svg>
+        <div class="scope__label">Commercial glass entry</div>
+        <div class="scope__sub">Storefront · aluminum · tempered</div>
+      </article>
+
+      <!-- 02 — Fire-rated HM pair (plan view — proper hinge-pivoted swings) -->
+      <article class="scope__cell">
+        <div class="scope__n">02</div>
+        <svg viewBox="0 0 400 300" class="scope__art" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <g fill="none" stroke="currentColor">
+            <rect x="20" y="140" width="80" height="20" fill="currentColor"/>
+            <rect x="300" y="140" width="80" height="20" fill="currentColor"/>
+            <rect x="96" y="138" width="8" height="24" fill="currentColor"/>
+            <rect x="296" y="138" width="8" height="24" fill="currentColor"/>
+            <rect x="96" y="54" width="8" height="96" fill="currentColor" opacity=".9"/>
+            <path d="M 100 54 A 96 96 0 0 1 196 150" stroke-width="1" stroke-dasharray="5 4" opacity=".65"/>
+            <rect x="296" y="54" width="8" height="96" fill="currentColor" opacity=".9"/>
+            <path d="M 300 54 A 96 96 0 0 0 204 150" stroke-width="1" stroke-dasharray="5 4" opacity=".65"/>
+            <circle cx="100" cy="150" r="3" fill="currentColor"/>
+            <circle cx="300" cy="150" r="3" fill="currentColor"/>
+            <line x1="200" y1="140" x2="200" y2="170" stroke-width="2"/>
+            <line x1="100" y1="200" x2="300" y2="200" stroke-width="1"/>
+            <polygon points="100,200 110,196 110,204" fill="currentColor"/>
+            <polygon points="300,200 290,196 290,204" fill="currentColor"/>
+            <line x1="100" y1="193" x2="100" y2="207" stroke-width=".8"/>
+            <line x1="300" y1="193" x2="300" y2="207" stroke-width=".8"/>
+          </g>
+        </svg>
+        <div class="scope__label">Fire-rated HM pair</div>
+        <div class="scope__sub">Hollow metal · 90-min UL · positive latch</div>
+      </article>
+
+      <!-- 03 — Hospital / OR double (plan — double-acting) -->
+      <article class="scope__cell">
+        <div class="scope__n">03</div>
+        <svg viewBox="0 0 400 300" class="scope__art" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <g fill="none" stroke="currentColor">
+            <rect x="20" y="140" width="70" height="20" fill="currentColor"/>
+            <rect x="310" y="140" width="70" height="20" fill="currentColor"/>
+            <rect x="86" y="138" width="8" height="24" fill="currentColor"/>
+            <rect x="306" y="138" width="8" height="24" fill="currentColor"/>
+            <g transform="rotate(-45 90 150)">
+              <rect x="86" y="54" width="8" height="96" fill="currentColor" opacity=".9"/>
+            </g>
+            <g transform="rotate(45 310 150)">
+              <rect x="306" y="54" width="8" height="96" fill="currentColor" opacity=".9"/>
+            </g>
+            <path d="M 90 54 A 96 96 0 0 1 186 150" stroke-width="1" stroke-dasharray="5 4" opacity=".55"/>
+            <path d="M 90 246 A 96 96 0 0 0 186 150" stroke-width="1" stroke-dasharray="3 4" opacity=".45"/>
+            <path d="M 310 54 A 96 96 0 0 0 214 150" stroke-width="1" stroke-dasharray="5 4" opacity=".55"/>
+            <path d="M 310 246 A 96 96 0 0 1 214 150" stroke-width="1" stroke-dasharray="3 4" opacity=".45"/>
+            <circle cx="90" cy="150" r="3" fill="currentColor"/>
+            <circle cx="310" cy="150" r="3" fill="currentColor"/>
+            <rect x="130" y="110" width="140" height="80" stroke-width=".8" stroke-dasharray="3 3" opacity=".4"/>
+          </g>
+        </svg>
+        <div class="scope__label">Hospital / OR double</div>
+        <div class="scope__sub">Double-acting · lead-lined · ICRA</div>
+      </article>
+
+      <!-- 04 — Residential entry (elevation with sidelites) -->
+      <article class="scope__cell">
+        <div class="scope__n">04</div>
+        <svg viewBox="0 0 400 300" class="scope__art" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <g fill="none" stroke="currentColor">
+            <rect x="60" y="30" width="280" height="30" stroke-width="2.5"/>
+            <line x1="140" y1="30" x2="140" y2="60" stroke-width="1"/>
+            <line x1="260" y1="30" x2="260" y2="60" stroke-width="1"/>
+            <rect x="60" y="60" width="80" height="210" stroke-width="2.5"/>
+            <rect x="70" y="70" width="60" height="190" stroke-width="1" opacity=".5"/>
+            <rect x="260" y="60" width="80" height="210" stroke-width="2.5"/>
+            <rect x="270" y="70" width="60" height="190" stroke-width="1" opacity=".5"/>
+            <rect x="140" y="60" width="120" height="210" stroke-width="3"/>
+            <rect x="154" y="76" width="92" height="40" stroke-width="1.2" opacity=".75"/>
+            <rect x="154" y="124" width="92" height="60" stroke-width="1.2" opacity=".75"/>
+            <rect x="154" y="192" width="92" height="68" stroke-width="1.2" opacity=".75"/>
+            <circle cx="240" cy="168" r="3.5" fill="currentColor"/>
+            <rect x="237" y="160" width="6" height="16" fill="currentColor"/>
+            <line x1="45" y1="272" x2="355" y2="272" stroke-width="2"/>
+          </g>
+        </svg>
+        <div class="scope__label">Residential entry</div>
+        <div class="scope__sub">Single-leaf · sidelites · mahogany / steel</div>
+      </article>
+
+      <!-- 05 — Frame elevation with dimensions -->
+      <article class="scope__cell">
+        <div class="scope__n">05</div>
+        <svg viewBox="0 0 400 300" class="scope__art" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <g fill="none" stroke="currentColor">
+            <rect x="50" y="60" width="300" height="14" fill="currentColor"/>
+            <rect x="50" y="74" width="14" height="200" fill="currentColor"/>
+            <rect x="336" y="74" width="14" height="200" fill="currentColor"/>
+            <rect x="64" y="74" width="272" height="200" stroke-width="1.2" stroke-dasharray="6 4" opacity=".7"/>
+            <rect x="56" y="90" width="16" height="10" fill="currentColor" opacity=".85"/>
+            <rect x="56" y="175" width="16" height="10" fill="currentColor" opacity=".85"/>
+            <rect x="56" y="254" width="16" height="10" fill="currentColor" opacity=".85"/>
+            <rect x="328" y="170" width="16" height="18" fill="currentColor" opacity=".85"/>
+            <line x1="50" y1="40" x2="350" y2="40" stroke-width="1"/>
+            <line x1="50" y1="34" x2="50" y2="46" stroke-width="1"/>
+            <line x1="350" y1="34" x2="350" y2="46" stroke-width="1"/>
+            <polygon points="50,40 60,36 60,44" fill="currentColor"/>
+            <polygon points="350,40 340,36 340,44" fill="currentColor"/>
+            <line x1="374" y1="60" x2="374" y2="274" stroke-width="1"/>
+            <line x1="368" y1="60" x2="380" y2="60" stroke-width="1"/>
+            <line x1="368" y1="274" x2="380" y2="274" stroke-width="1"/>
+            <polygon points="374,60 370,70 378,70" fill="currentColor"/>
+            <polygon points="374,274 370,264 378,264" fill="currentColor"/>
+            <line x1="50" y1="280" x2="350" y2="280" stroke-width="1.5"/>
+            <line x1="60" y1="280" x2="55" y2="290" stroke-width=".8"/>
+            <line x1="90" y1="280" x2="85" y2="290" stroke-width=".8"/>
+            <line x1="120" y1="280" x2="115" y2="290" stroke-width=".8"/>
+            <line x1="150" y1="280" x2="145" y2="290" stroke-width=".8"/>
+            <line x1="180" y1="280" x2="175" y2="290" stroke-width=".8"/>
+            <line x1="210" y1="280" x2="205" y2="290" stroke-width=".8"/>
+            <line x1="240" y1="280" x2="235" y2="290" stroke-width=".8"/>
+            <line x1="270" y1="280" x2="265" y2="290" stroke-width=".8"/>
+            <line x1="300" y1="280" x2="295" y2="290" stroke-width=".8"/>
+            <line x1="330" y1="280" x2="325" y2="290" stroke-width=".8"/>
+          </g>
+        </svg>
+        <div class="scope__label">Frame elevation</div>
+        <div class="scope__sub">Hollow-metal · 16 ga · welded &amp; KD</div>
+      </article>
+
+      <!-- 06 — Hardware set (exploded detail) -->
+      <article class="scope__cell">
+        <div class="scope__n">06</div>
+        <svg viewBox="0 0 400 300" class="scope__art" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <g fill="none" stroke="currentColor">
+            <rect x="170" y="30" width="60" height="240" stroke-width="2.5"/>
+            <line x1="180" y1="30" x2="180" y2="270" stroke-width="1" opacity=".5"/>
+            <rect x="140" y="40" width="48" height="22" stroke-width="1.5"/>
+            <rect x="188" y="46" width="26" height="10" stroke-width="1.2"/>
+            <rect x="166" y="80" width="8" height="28" fill="currentColor" opacity=".85"/>
+            <circle cx="170" cy="80" r="2.5" fill="currentColor"/>
+            <circle cx="170" cy="108" r="2.5" fill="currentColor"/>
+            <circle cx="200" cy="170" r="10" stroke-width="1.5"/>
+            <rect x="210" y="168" width="40" height="4" fill="currentColor"/>
+            <rect x="244" y="162" width="8" height="16" stroke-width="1.5"/>
+            <rect x="150" y="162" width="8" height="18" fill="currentColor" opacity=".85"/>
+            <rect x="166" y="220" width="8" height="28" fill="currentColor" opacity=".85"/>
+            <circle cx="170" cy="220" r="2.5" fill="currentColor"/>
+            <circle cx="170" cy="248" r="2.5" fill="currentColor"/>
+            <line x1="160" y1="52" x2="110" y2="52" stroke-width=".8" opacity=".6"/>
+            <circle cx="110" cy="52" r="8" stroke-width="1.2"/>
+            <text x="110" y="55" font-family="JetBrains Mono, monospace" font-size="9" fill="currentColor" text-anchor="middle" font-weight="600">1</text>
+            <line x1="162" y1="94" x2="110" y2="94" stroke-width=".8" opacity=".6"/>
+            <circle cx="110" cy="94" r="8" stroke-width="1.2"/>
+            <text x="110" y="97" font-family="JetBrains Mono, monospace" font-size="9" fill="currentColor" text-anchor="middle" font-weight="600">2</text>
+            <line x1="185" y1="170" x2="110" y2="170" stroke-width=".8" opacity=".6"/>
+            <circle cx="110" cy="170" r="8" stroke-width="1.2"/>
+            <text x="110" y="173" font-family="JetBrains Mono, monospace" font-size="9" fill="currentColor" text-anchor="middle" font-weight="600">3</text>
+            <line x1="254" y1="170" x2="310" y2="170" stroke-width=".8" opacity=".6"/>
+            <circle cx="310" cy="170" r="8" stroke-width="1.2"/>
+            <text x="310" y="173" font-family="JetBrains Mono, monospace" font-size="9" fill="currentColor" text-anchor="middle" font-weight="600">4</text>
+            <line x1="162" y1="234" x2="110" y2="234" stroke-width=".8" opacity=".6"/>
+            <circle cx="110" cy="234" r="8" stroke-width="1.2"/>
+            <text x="110" y="237" font-family="JetBrains Mono, monospace" font-size="9" fill="currentColor" text-anchor="middle" font-weight="600">5</text>
+          </g>
+        </svg>
+        <div class="scope__label">Hardware set</div>
+        <div class="scope__sub">Closer · hinges · lever · strike</div>
+      </article>
+
+    </div>
+    <div class="scope__foot">
+      <span>Hospitals · Surgical centers · Schools · Churches · Commercial TI · Residential</span>
+      <span class="scope__foot-r">A full opening, kitted to spec.</span>
+    </div>
+  </figure>
+</section>
+
+<!-- ────────────────────────────────────────────────────────── UPLOAD ── -->
+<section id="upload" class="upload">
+  <div class="upload__copy">
+    <div class="eyebrow">01 · Upload</div>
+    <h2>Send us the plans.<br/>We'll send back a bid.</h2>
+    <p>
+      Drop a full set of architectural drawings, door schedules, or hardware specs.
+      We accept large files — up to <strong>750&nbsp;MB per upload</strong> — straight to
+      our estimators. You'll get an acknowledgment the same business day and a
+      complete material + install bid within five.
+    </p>
+    <ul class="upload__bullets">
+      <li><span class="tick" aria-hidden="true">✓</span> PDF · DWG · ZIP accepted</li>
+      <li><span class="tick" aria-hidden="true">✓</span> Resumable uploads — large files are fine</li>
+      <li><span class="tick" aria-hidden="true">✓</span> Your drawings stay confidential</li>
+    </ul>
+  </div>
+
+  <form id="bid-form" class="upload__form" novalidate>
+    <div class="row">
+      <label class="field">
+        <span>Name<i>*</i></span>
+        <input name="name" required autocomplete="name" placeholder="Jane Doe" />
+      </label>
+      <label class="field">
+        <span>Company</span>
+        <input name="company" autocomplete="organization" placeholder="GC / developer" />
+      </label>
+    </div>
+    <div class="row">
+      <label class="field">
+        <span>Email<i>*</i></span>
+        <input type="email" name="email" required autocomplete="email" placeholder="you@company.com" />
+      </label>
+      <label class="field">
+        <span>Phone</span>
+        <input type="tel" name="phone" autocomplete="tel" placeholder="(___) ___-____" />
+      </label>
+    </div>
+    <div class="row">
+      <label class="field">
+        <span>Project city / address</span>
+        <input name="project_location" placeholder="Houston, TX" />
+      </label>
+      <label class="field">
+        <span>Project type</span>
+        <select name="project_type" defaultValue="">
+          <option value="">Select…</option>
+          <option>New commercial build</option>
+          <option>Renovation / TI</option>
+          <option>Hospital / surgical center</option>
+          <option>School / institutional</option>
+          <option>Government / municipal</option>
+          <option>Residential</option>
+          <option>Hardware supply only</option>
+          <option>Other</option>
+        </select>
+      </label>
+    </div>
+    <div class="row">
+      <label class="field">
+        <span>Approx. opening count</span>
+        <input name="opening_count" inputmode="numeric" placeholder="e.g. 40 doors" />
+      </label>
+      <label class="field">
+        <span>Target timeline</span>
+        <input name="timeline" placeholder="Bid due / construction start" />
+      </label>
+    </div>
+    <label class="field">
+      <span>Notes</span>
+      <textarea name="notes" rows="3" placeholder="Scope, fire rating, ADA, anything we should know."></textarea>
+    </label>
+
+    <!-- Dropzone -->
+    <div class="dropzone" id="dropzone" tabindex="0" aria-label="Upload blueprints">
+      <input type="file" id="file-input" multiple accept=".pdf,.dwg,.zip,application/pdf,application/zip,application/x-zip-compressed,application/acad,image/vnd.dwg" hidden />
+      <div class="dropzone__inner">
+        <div class="dropzone__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40">
+            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="6" width="26" height="34" rx="2"/>
+              <path d="M28 6v8h8"/>
+              <path d="M24 34V20m0 0-5 5m5-5 5 5"/>
+            </g>
+          </svg>
+        </div>
+        <div class="dropzone__title">Drag &amp; drop blueprints here</div>
+        <div class="dropzone__sub">or <button type="button" class="linkish" id="browse-btn">browse files</button> · PDF, DWG, ZIP · up to 750 MB each</div>
+      </div>
+    </div>
+
+    <ul class="filelist" id="filelist" aria-live="polite"></ul>
+
+    <div class="upload__actions">
+      <div class="upload__status" id="submit-status" role="status" aria-live="polite"></div>
+      <button class="btn btn--primary btn--lg" type="submit" id="submit-btn">
+        <span>Send to estimator</span>
+        <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 10h12M11 5l5 5-5 5"/></svg>
+      </button>
+    </div>
+    <p class="upload__fine">
+      By submitting you agree we may contact you about this project. We do not share drawings with third parties.
+    </p>
+  </form>
+</section>
+
+<!-- ─────────────────────────────────────────────────────── SERVICES ── -->
+<section id="services" class="services">
+  <div class="eyebrow">02 · Services</div>
+  <h2 class="section-title">Everything in the opening.<br/>And everything around it.</h2>
+  <div class="services__grid">
+    <article class="service">
+      <div class="service__num">01</div>
+      <h3>Hollow-metal doors &amp; frames</h3>
+      <p>Spartan-line HM doors and frames — fire-rated, sound-rated, ADA-compliant assemblies for commercial and institutional work.</p>
+      <ul><li>Single &amp; pair openings</li><li>20, 45, 60, 90 min ratings</li><li>Welded &amp; KD frames</li></ul>
+    </article>
+    <article class="service">
+      <div class="service__num">02</div>
+      <h3>Finish hardware</h3>
+      <p>Full hardware packages through our Platinum-tier dealer accounts — levers, closers, exits, electrified hardware, access control trim.</p>
+      <ul><li>ASSA ABLOY grouped brands</li><li>Tell Manufacturing</li><li>Keyed systems &amp; masters</li></ul>
+    </article>
+    <article class="service">
+      <div class="service__num">03</div>
+      <h3>Wood doors &amp; specialty</h3>
+      <p>Architectural wood doors, lead-lined, acoustic, and bullet-resistant assemblies — sourced and installed to spec.</p>
+      <ul><li>AWI Premium &amp; Custom</li><li>Lead-lined for imaging</li><li>STC-rated acoustic</li></ul>
+    </article>
+    <article class="service">
+      <div class="service__num">04</div>
+      <h3>General building</h3>
+      <p>Full-scope GC work on hospitals, surgical centers, and commercial tenant build-outs across Texas, California, and Arkansas.</p>
+      <ul><li>Hospitals &amp; surgical centers</li><li>Medical offices</li><li>Commercial TI</li></ul>
+    </article>
+    <article class="service">
+      <div class="service__num">05</div>
+      <h3>Installation crews</h3>
+      <p>Houston- and Dallas-based install teams trained to GC finish standards. Coordinated deliveries, punch-list discipline, clean sites.</p>
+      <ul><li>Union-quality finish</li><li>Punch-list turnaround</li><li>Schedule-driven crews</li></ul>
+    </article>
+    <article class="service">
+      <div class="service__num">06</div>
+      <h3>Estimating &amp; takeoff</h3>
+      <p>Plan-and-spec takeoffs with complete hardware schedules delivered for GCs and architects. Five-day turnaround standard.</p>
+      <ul><li>Door schedules</li><li>Hardware sets</li><li>Submittals &amp; shop drawings</li></ul>
+    </article>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────── CREDENTIALS ── -->
+<section id="credentials" class="creds">
+  <div class="creds__left">
+    <div class="eyebrow">03 · Why us</div>
+    <h2>Platinum-tier<br/>vendor access.<br/><em>Ten years in the trade.</em></h2>
+    <p>
+      We're not a new shop figuring it out. Our lead operator has spent over a
+      decade in commercial doors and hardware — and we carry the vendor
+      relationships that make the math work on the bid sheet.
+    </p>
+    <p>
+      Both of our primary manufacturers are headquartered in Texas. That means
+      lower freight, faster deliveries, and tighter coordination on Houston and
+      Dallas job sites.
+    </p>
+  </div>
+  <div class="creds__right">
+    <div class="cred-card">
+      <div class="cred-card__row">
+        <span class="cred-card__tier">PLATINUM DEALER</span>
+        <span class="cred-card__id">TX · DFW · HOU</span>
+      </div>
+      <div class="cred-card__brand">ASSA ABLOY</div>
+      <div class="cred-card__meta">
+        <div><span>Scope</span><b>Finish hardware · electrified · access</b></div>
+        <div><span>Tier</span><b>Platinum</b></div>
+        <div><span>HQ</span><b>New Haven · Global. TX grouped brands.</b></div>
+      </div>
+    </div>
+    <div class="cred-card">
+      <div class="cred-card__row">
+        <span class="cred-card__tier">PLATINUM DEALER</span>
+        <span class="cred-card__id">TX · DFW · HOU</span>
+      </div>
+      <div class="cred-card__brand">TELL MANUFACTURING</div>
+      <div class="cred-card__meta">
+        <div><span>Scope</span><b>Hardware · Spartan HM doors &amp; frames</b></div>
+        <div><span>Tier</span><b>Platinum</b></div>
+        <div><span>HQ</span><b>Texas</b></div>
+      </div>
+    </div>
+    <div class="cred-strip">
+      <div><b>10+</b><span>Years in commercial doors</span></div>
+      <div><b>3</b><span>States delivered: TX · CA · AR</span></div>
+      <div><b>5&nbsp;day</b><span>Standard bid turnaround</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────────── PROJECTS ── -->
+<section id="projects" class="projects">
+  <div class="eyebrow">04 · Project types</div>
+  <h2 class="section-title">What we build.</h2>
+  <div class="projects__grid">
+    <article class="proj">
+      <div class="proj__emoji" aria-hidden="true">🏥</div>
+      <div class="proj__tag">Healthcare</div>
+      <h3>Hospitals &amp; inpatient</h3>
+      <p>Lead-lined and STC-rated openings, fire-rated corridors, coordinated with MEP and finishes.</p>
+    </article>
+    <article class="proj">
+      <div class="proj__emoji" aria-hidden="true">⚕️</div>
+      <div class="proj__tag">Surgical</div>
+      <h3>Surgical &amp; specialty centers</h3>
+      <p>Positive-pressure suites, cleanroom adjacencies, washable finishes, strict schedule discipline.</p>
+    </article>
+    <article class="proj">
+      <div class="proj__emoji" aria-hidden="true">🩺</div>
+      <div class="proj__tag">Medical office</div>
+      <h3>Medical offices</h3>
+      <p>ASC and clinic build-outs from plan through final walk. Hardware kitted by opening.</p>
+    </article>
+    <article class="proj">
+      <div class="proj__emoji" aria-hidden="true">🎓</div>
+      <div class="proj__tag">Education</div>
+      <h3>School districts</h3>
+      <p>Classroom security hardware, lockdown-ready trim, summer-schedule installs.</p>
+    </article>
+    <article class="proj">
+      <div class="proj__emoji" aria-hidden="true">🏢</div>
+      <div class="proj__tag">Commercial TI</div>
+      <h3>Commercial TI</h3>
+      <p>Office, retail, and mixed-use tenant improvements with tight GC schedules.</p>
+    </article>
+    <article class="proj">
+      <div class="proj__emoji" aria-hidden="true">🏛️</div>
+      <div class="proj__tag">Civic</div>
+      <h3>Government &amp; municipal</h3>
+      <p>Civic facilities, fire stations, and DOT-adjacent work with documentation to match.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────── PROCESS ── -->
+<section id="process" class="process">
+  <div class="eyebrow">05 · Process</div>
+  <h2 class="section-title">How a bid becomes a finished opening.</h2>
+  <ol class="process__list">
+    <li>
+      <div class="process__n">01</div>
+      <div class="process__body">
+        <h3>Plans in</h3>
+        <p>You upload drawings &amp; specs above, or email them directly. ZIPs and DWG sets are fine.</p>
+      </div>
+      <div class="process__meta">Same day ack</div>
+    </li>
+    <li>
+      <div class="process__n">02</div>
+      <div class="process__body">
+        <h3>Takeoff &amp; hardware schedule</h3>
+        <p>We run the door schedule and build hardware sets to spec — cross-checking fire ratings, ADA, and electrified trim.</p>
+      </div>
+      <div class="process__meta">Days 1–3</div>
+    </li>
+    <li>
+      <div class="process__n">03</div>
+      <div class="process__body">
+        <h3>Bid delivered</h3>
+        <p>Line-item material bid plus install labor — a document your GC or owner can drop into their spreadsheet.</p>
+      </div>
+      <div class="process__meta">By day 5</div>
+    </li>
+    <li>
+      <div class="process__n">04</div>
+      <div class="process__body">
+        <h3>Submittals &amp; order</h3>
+        <p>Approved submittals, shop drawings, and release to Texas-based manufacturers. Lower freight, faster delivery.</p>
+      </div>
+      <div class="process__meta">Weeks 1–4</div>
+    </li>
+    <li>
+      <div class="process__n">05</div>
+      <div class="process__body">
+        <h3>Install</h3>
+        <p>Houston or Dallas crew on site. Kitted by opening, coordinated with your super, clean punch list.</p>
+      </div>
+      <div class="process__meta">On schedule</div>
+    </li>
+    <li>
+      <div class="process__n">06</div>
+      <div class="process__body">
+        <h3>Close-out</h3>
+        <p>As-built door schedules, keying, warranties, and O&amp;M docs handed over for the project file.</p>
+      </div>
+      <div class="process__meta">Final walk</div>
+    </li>
+  </ol>
+</section>
+
+<!-- ─────────────────────────────────────────────────── COVERAGE MAP ── -->
+<section id="coverage" class="coverage">
+  <div class="coverage__copy">
+    <div class="eyebrow">06 · Coverage</div>
+    <h2>All of Texas.<br/>Crews in Houston<br/>&amp; Dallas.</h2>
+    <p>Our base of operations is Sugar Land. From Houston and Dallas hubs we cover the Triangle — Houston, Dallas/Fort Worth, San Antonio, Austin — plus West Texas, the Valley, and everything in between.</p>
+    <ul class="coverage__cities">
+      <li>Houston <span>HUB</span></li>
+      <li>Dallas / Fort Worth <span>HUB</span></li>
+      <li>Austin</li>
+      <li>San Antonio</li>
+      <li>El Paso</li>
+      <li>Corpus Christi</li>
+      <li>Lubbock</li>
+      <li>Amarillo</li>
+    </ul>
+  </div>
+  <div class="coverage__map" aria-label="Service area: Texas, with hubs in Houston and Dallas">
+    <!-- Simplified Texas silhouette -->
+    <svg viewBox="0 0 600 620" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <defs>
+        <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+          <path d="M 24 0 L 0 0 0 24" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.18"/>
+        </pattern>
+        <pattern id="diag" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+          <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-width="1" opacity=".22"/>
+        </pattern>
+      </defs>
+      <rect width="600" height="620" fill="url(#grid)"/>
+      <!-- Texas rough silhouette -->
+      <path id="tx" d="
+        M70 90 L260 90 L260 60 L330 60 L340 95 L430 110 L470 135 L485 175
+        L500 215 L520 240 L555 270 L555 310 L540 340 L515 370 L490 400
+        L475 435 L455 470 L420 495 L390 525 L355 555 L320 585 L290 590
+        L265 560 L240 525 L220 495 L205 455 L180 420 L160 395 L140 370
+        L115 340 L95 310 L80 275 L70 235 L60 190 L55 145 Z"
+        fill="url(#diag)" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+
+      <!-- Service-area label lines -->
+      <g font-family="JetBrains Mono, monospace" font-size="10" fill="currentColor" opacity=".55">
+        <text x="90" y="80">29°–36° N</text>
+        <text x="480" y="600" text-anchor="end">268,597 SQ MI</text>
+      </g>
+
+      <!-- Pins -->
+      <!-- Dallas ~ 380,220 -->
+      <g class="pin" transform="translate(378 215)">
+        <circle class="pin__ring" r="20"/>
+        <circle class="pin__ring" r="32"/>
+        <circle r="6" fill="currentColor"/>
+        <text x="12" y="-10" font-family="Inter" font-weight="600" font-size="15" fill="currentColor">Dallas / FW</text>
+        <text x="12" y="5" font-family="JetBrains Mono" font-size="10" fill="currentColor" opacity=".7">HUB · N TX</text>
+      </g>
+      <!-- Houston ~ 420, 430 -->
+      <g class="pin" transform="translate(420 430)">
+        <circle class="pin__ring" r="20"/>
+        <circle class="pin__ring" r="32"/>
+        <circle r="6" fill="currentColor"/>
+        <text x="12" y="-10" font-family="Inter" font-weight="600" font-size="15" fill="currentColor">Houston</text>
+        <text x="12" y="5" font-family="JetBrains Mono" font-size="10" fill="currentColor" opacity=".7">HUB · GULF</text>
+      </g>
+      <!-- Secondary cities -->
+      <g fill="currentColor" font-family="Inter" font-size="11" font-weight="500">
+        <g transform="translate(335 405)"><circle r="3"/><text x="7" y="4">Austin</text></g>
+        <g transform="translate(315 475)"><circle r="3"/><text x="7" y="4">San Antonio</text></g>
+        <g transform="translate(95 235)"><circle r="3"/><text x="7" y="4">El Paso</text></g>
+        <g transform="translate(405 560)"><circle r="3"/><text x="7" y="4">Corpus</text></g>
+        <g transform="translate(235 175)"><circle r="3"/><text x="7" y="4">Lubbock</text></g>
+        <g transform="translate(220 110)"><circle r="3"/><text x="7" y="4">Amarillo</text></g>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────── CONTACT ── -->
+<section id="contact" class="contact">
+  <div class="eyebrow">07 · Contact</div>
+  <div class="contact__grid">
+    <div>
+      <h2>Talk to us.</h2>
+      <p class="contact__lede">No bots. Calls answered by an estimator, not a receptionist.</p>
+    </div>
+    <div class="contact__cards">
+      <a class="contact-card" href="tel:+18186690985">
+        <span class="contact-card__k">Phone</span>
+        <span class="contact-card__v">818-669-0985</span>
+      </a>
+      <a class="contact-card" href="mailto:bids@lonestatebuilders.co">
+        <span class="contact-card__k">Bids &amp; estimates</span>
+        <span class="contact-card__v">bids@lonestatebuilders.co</span>
+      </a>
+      <div class="contact-card">
+        <span class="contact-card__k">Office</span>
+        <span class="contact-card__v">3914 Flintrock Ct<br/>Sugar Land, TX</span>
+      </div>
+      <div class="contact-card">
+        <span class="contact-card__k">Hours</span>
+        <span class="contact-card__v">Mon–Fri · 7am–6pm CT<br/>After-hours: text the office line</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─────────────────────────────────────────────────────── FOOTER ── -->
+<footer class="foot">
+  <div class="foot__top">
+    <div class="foot__brand">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22"><path fill="currentColor" d="M16 2 L29 9 V23 L16 30 L3 23 V9 Z M16 6 L7 11 V21 L16 26 L25 21 V11 Z"/><path fill="currentColor" d="M14 11 H18 V21 H14 Z"/></svg>
+      </span>
+      <div>
+        <div class="foot__name">Lone State Builders Co. LLC</div>
+        <div class="foot__tag">Commercial &amp; residential doors · Hardware · General building · Texas.</div>
+      </div>
+    </div>
+    <div class="foot__links">
+      <a href="#services">Services</a>
+      <a href="#credentials">Why us</a>
+      <a href="#projects">Projects</a>
+      <a href="#process">Process</a>
+      <a href="#coverage">Coverage</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+  <div class="foot__bottom">
+    <span>© 2026 Lone State Builders Co. LLC</span>
+    <span>Sugar Land · Houston · Dallas</span>
+    <span>Serving all of Texas</span>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Supabase client (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* =============================================================================
+   Supabase config for Lone State Builders Co
+   -----------------------------------------------------------------------------
+   NOTE: Only the public anon key belongs in client code. NEVER put the secret
+   key here — it's server-side only.
+============================================================================= */
+
+window.LSB_CONFIG = {
+  SUPABASE_URL: "https://rkjrspovoueajamzpfzc.supabase.co",
+  SUPABASE_ANON_KEY:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJranJzcG92b3VlYWphbXpwZnpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3NjQ2NDUsImV4cCI6MjA4ODM0MDY0NX0.7X-OL0K3TjCH5izqOJ4YCBrGbmJUNgK82PSjUatRYhM",
+
+  // Storage bucket name — see supabase-setup.sql
+  BUCKET: "blueprints",
+
+  // Database table that receives each submitted lead
+  LEADS_TABLE: "leads",
+
+  // Limits
+  MAX_FILE_BYTES: 750 * 1024 * 1024, // 750 MB per file
+  ACCEPTED: /\.(pdf|dwg|zip)$/i,
+};
+
+</script>
+<script>
+/* =============================================================================
+   Lone State Builders Co — landing page logic
+   - Supabase client (v2)
+   - Resumable uploads to Storage (TUS) — handles large files
+   - Lead record written to `leads` table
+============================================================================= */
+
+(() => {
+  const cfg = window.LSB_CONFIG;
+  const sb =
+    window.supabase && cfg && cfg.SUPABASE_URL && cfg.SUPABASE_ANON_KEY
+      ? window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY)
+      : null;
+
+  // ── DOM ──────────────────────────────────────────────────────────────────
+  const form = document.getElementById("bid-form");
+  const fileInput = document.getElementById("file-input");
+  const dropzone = document.getElementById("dropzone");
+  const browseBtn = document.getElementById("browse-btn");
+  const filelist = document.getElementById("filelist");
+  const submitBtn = document.getElementById("submit-btn");
+  const statusEl = document.getElementById("submit-status");
+  const toastEl = document.getElementById("toast");
+
+  // files: [{ id, file, progress, status: 'queued'|'uploading'|'done'|'error', path, error }]
+  const files = [];
+  let uidCounter = 0;
+
+  // ── Helpers ──────────────────────────────────────────────────────────────
+  const fmtBytes = (n) => {
+    if (n < 1024) return `${n} B`;
+    if (n < 1024 ** 2) return `${(n / 1024).toFixed(1)} KB`;
+    if (n < 1024 ** 3) return `${(n / 1024 ** 2).toFixed(1)} MB`;
+    return `${(n / 1024 ** 3).toFixed(2)} GB`;
+  };
+  const extOf = (name) => {
+    const m = /\.([^.]+)$/.exec(name);
+    return m ? m[1].toUpperCase() : "FILE";
+  };
+  const slugify = (s) =>
+    (s || "")
+      .toString()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "")
+      .slice(0, 40);
+
+  function toast(msg, kind = "") {
+    toastEl.textContent = msg;
+    toastEl.className = `toast is-on ${kind ? "is-" + kind : ""}`;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => (toastEl.className = "toast"), 4200);
+  }
+
+  function setStatus(msg, kind = "") {
+    statusEl.textContent = msg;
+    statusEl.className = `upload__status ${kind ? kind : ""}`;
+  }
+
+  // ── File list rendering ─────────────────────────────────────────────────
+  function renderFiles() {
+    filelist.innerHTML = "";
+    files.forEach((f) => {
+      const li = document.createElement("li");
+      li.dataset.id = f.id;
+
+      const icon = document.createElement("div");
+      icon.className = "ficon";
+      icon.textContent = extOf(f.file.name);
+
+      const meta = document.createElement("div");
+      meta.className = "fmeta";
+      const fname = document.createElement("div");
+      fname.className = "fname";
+      fname.textContent = f.file.name;
+      const fsub = document.createElement("div");
+      let subKind = "";
+      let subTxt = fmtBytes(f.file.size);
+      if (f.status === "uploading") subTxt = `${fmtBytes(f.file.size)} · uploading ${Math.round(f.progress)}%`;
+      if (f.status === "done") { subTxt = `${fmtBytes(f.file.size)} · uploaded`; subKind = "ok"; }
+      if (f.status === "error") { subTxt = `${f.error || "upload failed"}`; subKind = "err"; }
+      fsub.className = `fsub ${subKind}`;
+      fsub.textContent = subTxt;
+      meta.appendChild(fname);
+      meta.appendChild(fsub);
+
+      const prog = document.createElement("div");
+      prog.className = "fprog";
+      const bar = document.createElement("span");
+      bar.style.width = `${f.progress || 0}%`;
+      prog.appendChild(bar);
+
+      const rm = document.createElement("button");
+      rm.type = "button";
+      rm.className = "frm";
+      rm.setAttribute("aria-label", `Remove ${f.file.name}`);
+      rm.innerHTML = "&times;";
+      rm.onclick = () => {
+        const i = files.findIndex((x) => x.id === f.id);
+        if (i >= 0) files.splice(i, 1);
+        renderFiles();
+      };
+
+      li.appendChild(icon);
+      li.appendChild(meta);
+      li.appendChild(prog);
+      li.appendChild(rm);
+      filelist.appendChild(li);
+    });
+  }
+
+  // ── File intake ─────────────────────────────────────────────────────────
+  function addFiles(fl) {
+    [...fl].forEach((file) => {
+      // validate type
+      if (!cfg.ACCEPTED.test(file.name)) {
+        toast(`${file.name}: unsupported type — use PDF, DWG or ZIP`, "err");
+        return;
+      }
+      if (file.size > cfg.MAX_FILE_BYTES) {
+        toast(`${file.name}: exceeds 750 MB limit`, "err");
+        return;
+      }
+      files.push({
+        id: ++uidCounter,
+        file,
+        progress: 0,
+        status: "queued",
+      });
+    });
+    renderFiles();
+  }
+
+  browseBtn.addEventListener("click", () => fileInput.click());
+  dropzone.addEventListener("click", (e) => {
+    if (e.target === browseBtn) return;
+    fileInput.click();
+  });
+  dropzone.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
+  fileInput.addEventListener("change", (e) => {
+    addFiles(e.target.files);
+    fileInput.value = "";
+  });
+
+  ["dragenter", "dragover"].forEach((ev) =>
+    dropzone.addEventListener(ev, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.add("is-drag");
+    })
+  );
+  ["dragleave", "drop"].forEach((ev) =>
+    dropzone.addEventListener(ev, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.remove("is-drag");
+    })
+  );
+  dropzone.addEventListener("drop", (e) => {
+    if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+  });
+
+  // ── Resumable upload via TUS (works for large files) ────────────────────
+  // https://supabase.com/docs/guides/storage/uploads/resumable-uploads
+  let tusLoader = null;
+  function loadTus() {
+    if (window.tus) return Promise.resolve();
+    if (tusLoader) return tusLoader;
+    tusLoader = new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/tus-js-client@4.1.0/dist/tus.min.js";
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+    return tusLoader;
+  }
+
+  async function uploadOne(entry, folder) {
+    await loadTus();
+    entry.status = "uploading";
+    renderFiles();
+
+    const objectName = `${folder}/${Date.now()}-${slugify(entry.file.name.replace(/\.[^.]+$/, ""))}.${extOf(entry.file.name).toLowerCase()}`;
+
+    return new Promise((resolve, reject) => {
+      const upload = new window.tus.Upload(entry.file, {
+        endpoint: `${cfg.SUPABASE_URL}/storage/v1/upload/resumable`,
+        retryDelays: [0, 3000, 5000, 10000, 20000],
+        headers: {
+          authorization: `Bearer ${cfg.SUPABASE_ANON_KEY}`,
+          "x-upsert": "true",
+        },
+        uploadDataDuringCreation: true,
+        removeFingerprintOnSuccess: true,
+        metadata: {
+          bucketName: cfg.BUCKET,
+          objectName,
+          contentType: entry.file.type || "application/octet-stream",
+          cacheControl: "3600",
+        },
+        chunkSize: 6 * 1024 * 1024, // Supabase requires fixed 6MB chunks for TUS
+        onError: (err) => {
+          entry.status = "error";
+          entry.error = (err && err.message) || "upload failed";
+          renderFiles();
+          reject(err);
+        },
+        onProgress: (bytesUploaded, bytesTotal) => {
+          entry.progress = (bytesUploaded / bytesTotal) * 100;
+          renderFiles();
+        },
+        onSuccess: () => {
+          entry.status = "done";
+          entry.progress = 100;
+          entry.path = objectName;
+          renderFiles();
+          resolve();
+        },
+      });
+
+      // Check for previous uploads to resume
+      upload.findPreviousUploads().then((previous) => {
+        if (previous.length) upload.resumeFromPreviousUpload(previous[0]);
+        upload.start();
+      });
+    });
+  }
+
+  async function uploadAll(folder) {
+    const queue = files.filter((f) => f.status !== "done");
+    for (const entry of queue) {
+      try {
+        await uploadOne(entry, folder);
+      } catch (err) {
+        throw new Error(`Failed on ${entry.file.name}: ${err.message || err}`);
+      }
+    }
+  }
+
+  // ── Submit ──────────────────────────────────────────────────────────────
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!sb) {
+      setStatus("Supabase not configured.", "err");
+      toast("Supabase is not configured. Check config.js.", "err");
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (!data.name || !data.email) {
+      setStatus("Name and email are required.", "err");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    const origLabel = submitBtn.innerHTML;
+
+    try {
+      // 1. Upload files to Storage (folder per submission)
+      const folder = `${new Date().toISOString().slice(0, 10)}/${slugify(
+        (data.company || data.name) + "-" + Date.now().toString(36)
+      )}`;
+
+      if (files.length) {
+        submitBtn.innerHTML = "<span>Uploading blueprints…</span>";
+        setStatus(`Uploading ${files.length} file${files.length > 1 ? "s" : ""}…`);
+        await uploadAll(folder);
+      }
+
+      // 2. Insert lead row
+      submitBtn.innerHTML = "<span>Sending…</span>";
+      setStatus("Sending your request…");
+
+      const row = {
+        name: data.name,
+        company: data.company || null,
+        email: data.email,
+        phone: data.phone || null,
+        project_location: data.project_location || null,
+        project_type: data.project_type || null,
+        opening_count: data.opening_count || null,
+        timeline: data.timeline || null,
+        notes: data.notes || null,
+        file_paths: files.filter((f) => f.status === "done").map((f) => f.path),
+        file_count: files.length,
+        total_bytes: files.reduce((a, b) => a + b.file.size, 0),
+        source: "landing",
+        user_agent: navigator.userAgent,
+      };
+
+      const { data: inserted, error } = await sb
+        .from(cfg.LEADS_TABLE)
+        .insert([row])
+        .select("id")
+        .single();
+      if (error) throw error;
+
+      // 2a. Fire the edge function → sends welcome + team emails via SendGrid.
+      //     Non-blocking from the user's POV: if email fails we still thank them.
+      try {
+        await sb.functions.invoke("send-lead-emails", {
+          body: { lead_id: inserted?.id },
+        });
+      } catch (mailErr) {
+        console.warn("Email notification failed:", mailErr);
+      }
+
+      // 3. Done
+      setStatus("Received — we'll be in touch within one business day.", "ok");
+      toast("Request sent. Thank you!", "ok");
+      form.reset();
+      files.length = 0;
+      renderFiles();
+      submitBtn.innerHTML = "<span>Sent ✓</span>";
+      setTimeout(() => {
+        submitBtn.innerHTML = origLabel;
+        submitBtn.disabled = false;
+      }, 3500);
+    } catch (err) {
+      console.error(err);
+      setStatus(err.message || "Something went wrong.", "err");
+      toast(err.message || "Upload or submission failed.", "err");
+      submitBtn.innerHTML = origLabel;
+      submitBtn.disabled = false;
+    }
+  });
+})();
+
+</script>
+</body>
+</html>
