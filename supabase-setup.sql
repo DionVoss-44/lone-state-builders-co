@@ -63,22 +63,31 @@ on conflict (id) do update
 
 
 -- 3. STORAGE POLICIES ────────────────────────────────────────────────────────
--- Allow anonymous visitors to UPLOAD into the blueprints bucket, but not
--- list, read, or delete. This keeps submitted drawings confidential.
-drop policy if exists "anon can upload to blueprints"   on storage.objects;
-drop policy if exists "anon can resume own uploads"     on storage.objects;
+-- Allow visitors to UPLOAD into the blueprints bucket, but not list, read, or
+-- delete. Submitted drawings stay confidential.
+--
+-- Scope is `to public` (not `to anon`) on purpose. `public` matches every role
+-- Postgres can assign to the request (anon, authenticated, service_role), so
+-- the policy holds up even if the storage API's role resolution drifts or the
+-- same form is later hit while a session cookie is present. This avoids the
+-- 403 "new row violates row-level security policy" class of failures on the
+-- /storage/v1/upload/resumable endpoint.
+drop policy if exists "anon can upload to blueprints"       on storage.objects;
+drop policy if exists "anon can resume own uploads"         on storage.objects;
+drop policy if exists "public can upload to blueprints"     on storage.objects;
+drop policy if exists "public can resume blueprints uploads" on storage.objects;
 
-create policy "anon can upload to blueprints"
+create policy "public can upload to blueprints"
   on storage.objects
   for insert
-  to anon
+  to public
   with check ( bucket_id = 'blueprints' );
 
 -- Needed so tus-js-client can HEAD/PATCH the in-progress upload while resuming.
-create policy "anon can resume own uploads"
+create policy "public can resume blueprints uploads"
   on storage.objects
   for update
-  to anon
+  to public
   using     ( bucket_id = 'blueprints' )
   with check( bucket_id = 'blueprints' );
 

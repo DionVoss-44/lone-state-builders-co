@@ -1683,6 +1683,10 @@ window.LSB_CONFIG = {
         retryDelays: [0, 3000, 5000, 10000, 20000],
         headers: {
           authorization: `Bearer ${cfg.SUPABASE_ANON_KEY}`,
+          // Both Authorization AND apikey are required for the resumable
+          // endpoint to reliably resolve the anon role — without apikey,
+          // some projects return 403 "new row violates RLS policy".
+          apikey: cfg.SUPABASE_ANON_KEY,
           "x-upsert": "true",
         },
         uploadDataDuringCreation: true,
