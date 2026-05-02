@@ -1,0 +1,4 @@
+project_id = "lonestate"
+
+[functions.send-lead-emails]
+verify_jwt = false
