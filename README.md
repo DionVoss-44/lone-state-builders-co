@@ -33,9 +33,9 @@ Uploads use `tus-js-client` so large files resume on a dropped connection.
 
 Content lives directly in `index.html`. Phone and address are in the contact section and footer.
 
-## Email notifications (SendGrid)
+## Email notifications (Resend)
 
-Emails are sent by a Supabase Edge Function (`supabase/functions/send-lead-emails`) — **never from the browser** (that would expose your SendGrid key).
+Emails are sent by a Supabase Edge Function (`supabase/functions/send-lead-emails`) — **never from the browser** (that would expose your Resend key).
 
 On every submission the function sends:
 1. A welcome email to the person who uploaded
@@ -48,17 +48,17 @@ npm i -g supabase
 supabase login
 supabase link --project-ref rkjrspovoueajamzpfzc
 
-supabase secrets set SENDGRID_API_KEY=ee29ae4dfa9a4e5cd82e144b15757342
-supabase secrets set FROM_EMAIL=bids@lonestatebuilders.co
+supabase secrets set RESEND_API_KEY=<your-resend-api-key>
+supabase secrets set FROM_EMAIL=bids@lonestateservices.com
 supabase secrets set FROM_NAME="Lone State Builders Co"
 supabase secrets set TEAM_EMAILS="daniel@purityhealth.co,F.turk@live.com"
 
 supabase functions deploy send-lead-emails --no-verify-jwt
 ```
 
-**Important:** verify your `FROM_EMAIL` (or its domain) inside SendGrid → *Settings → Sender Authentication*. SendGrid rejects unverified senders.
+**Important:** verify the sending domain (`lonestateservices.com`) inside Resend → *Domains*. Resend rejects sends from unverified domains.
 
 ## Security note
 
 The `config.js` file contains only the **public anon key**, which is safe to ship.
-The SendGrid key lives server-side in Supabase Edge Function secrets — never in client code.
+The Resend key lives server-side in Supabase Edge Function secrets — never in client code.

@@ -10,21 +10,21 @@
 //  2. From project root:
 //       supabase login
 //       supabase link --project-ref rkjrspovoueajamzpfzc
-//       supabase secrets set SENDGRID_API_KEY=ee29ae4dfa9a4e5cd82e144b15757342
-//       supabase secrets set FROM_EMAIL=bids@lonestatebuilders.co
+//       supabase secrets set RESEND_API_KEY=<your-resend-api-key>
+//       supabase secrets set FROM_EMAIL=bids@lonestateservices.com
 //       supabase secrets set FROM_NAME="Lone State Builders Co"
 //       supabase secrets set TEAM_EMAILS="daniel@purityhealth.co,F.turk@live.com"
 //       supabase functions deploy send-lead-emails --no-verify-jwt
 //
-//  NOTE ON FROM_EMAIL: SendGrid will REJECT the send unless this address
-//  (or its domain) is verified in SendGrid → Settings → Sender Authentication.
+//  NOTE ON FROM_EMAIL: Resend will REJECT the send unless the sending domain
+//  (lonestateservices.com) is verified in Resend → Domains.
 // ============================================================================
 
 // deno-lint-ignore-file no-explicit-any
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const SENDGRID_API_KEY = Deno.env.get("SENDGRID_API_KEY") ?? "";
-const FROM_EMAIL = Deno.env.get("FROM_EMAIL") ?? "bids@lonestatebuilders.co";
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY") ?? "";
+const FROM_EMAIL = Deno.env.get("FROM_EMAIL") ?? "bids@lonestateservices.com";
 const FROM_NAME  = Deno.env.get("FROM_NAME")  ?? "Lone State Builders Co";
 const TEAM_EMAILS = (Deno.env.get("TEAM_EMAILS") ?? "daniel@purityhealth.co,F.turk@live.com")
   .split(",").map(s => s.trim()).filter(Boolean);
@@ -65,18 +65,18 @@ async function signedUrls(paths: string[]): Promise<{path: string; url: string}[
   }));
 }
 
-async function sgSend(payload: Record<string, unknown>): Promise<void> {
-  const r = await fetch("https://api.sendgrid.com/v3/mail/send", {
+async function resendSend(payload: Record<string, unknown>): Promise<void> {
+  const r = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${SENDGRID_API_KEY}`,
+      "Authorization": `Bearer ${RESEND_API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
   });
   if (!r.ok) {
     const body = await r.text();
-    throw new Error(`SendGrid ${r.status}: ${body}`);
+    throw new Error(`Resend ${r.status}: ${body}`);
   }
 }
 
@@ -177,24 +177,26 @@ Deno.serve(async (req) => {
 
     const urls = await signedUrls(lead.file_paths ?? []);
 
+    const fromHeader = `${FROM_NAME} <${FROM_EMAIL}>`;
+
     // (1) Welcome email to uploader
     if (lead.email) {
-      await sgSend({
-        personalizations: [{ to: [{ email: lead.email, name: lead.name }] }],
-        from: { email: FROM_EMAIL, name: FROM_NAME },
-        reply_to: { email: FROM_EMAIL, name: FROM_NAME },
+      await resendSend({
+        from: fromHeader,
+        to: [lead.email],
+        reply_to: FROM_EMAIL,
         subject: `We've got your plans, ${String(lead.name).split(" ")[0]} — Lone State Builders`,
-        content: [{ type: "text/html", value: welcomeHtml(lead) }],
+        html: welcomeHtml(lead),
       });
     }
 
     // (2) Team notification
-    await sgSend({
-      personalizations: [{ to: TEAM_EMAILS.map(email => ({ email })) }],
-      from: { email: FROM_EMAIL, name: FROM_NAME },
-      reply_to: lead.email ? { email: lead.email, name: lead.name } : undefined,
+    await resendSend({
+      from: fromHeader,
+      to: TEAM_EMAILS,
+      reply_to: lead.email || FROM_EMAIL,
       subject: `[Lead] ${lead.name}${lead.company ? " · " + lead.company : ""}${lead.project_location ? " · " + lead.project_location : ""}`,
-      content: [{ type: "text/html", value: teamHtml(lead, urls) }],
+      html: teamHtml(lead, urls),
     });
 
     // Mark the row as notified
