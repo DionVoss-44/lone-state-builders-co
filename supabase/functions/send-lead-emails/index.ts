@@ -14,6 +14,7 @@
 //       supabase secrets set FROM_EMAIL=bids@lonestateservices.com
 //       supabase secrets set FROM_NAME="Lone State Services"
 //       supabase secrets set TEAM_EMAILS="daniel@purityhealth.co,F.turk@live.com"
+//       supabase secrets set TURNSTILE_SECRET=0x4AAAAAADIDeQvuQcTq290NLlbIQSQiG6Q
 //       supabase functions deploy send-lead-emails --no-verify-jwt
 //
 //  NOTE ON FROM_EMAIL: Resend requires the sender domain to be verified
@@ -24,6 +25,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY") ?? "";
+const TURNSTILE_SECRET = Deno.env.get("TURNSTILE_SECRET") ?? "";
 const FROM_EMAIL = Deno.env.get("FROM_EMAIL") ?? "bids@lonestateservices.com";
 const FROM_NAME  = Deno.env.get("FROM_NAME")  ?? "Lone State Services";
 const TEAM_EMAILS = (Deno.env.get("TEAM_EMAILS") ?? "daniel@purityhealth.co,F.turk@live.com")
@@ -180,8 +182,22 @@ Deno.serve(async (req) => {
   if (req.method !== "POST")    return new Response("Method not allowed", { status: 405, headers: CORS });
 
   try {
-    const { lead_id } = await req.json();
+    const { lead_id, turnstile_token } = await req.json();
     if (!lead_id) throw new Error("Missing lead_id");
+
+    // Verify Cloudflare Turnstile token (bot protection)
+    if (TURNSTILE_SECRET && turnstile_token) {
+      const tsRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret: TURNSTILE_SECRET, response: turnstile_token }),
+      });
+      const tsData = await tsRes.json();
+      if (!tsData.success) {
+        console.warn("Turnstile verification failed:", tsData);
+        throw new Error("Bot check failed — please try again.");
+      }
+    }
 
     // Load full lead row with service role (bypasses RLS)
     const { data: lead, error: lerr } = await admin

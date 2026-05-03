@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Cloudflare Turnstile — bot protection for the upload form -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
 /* =============================================================================
    LoneState Doors & More — landing page
@@ -1117,6 +1119,9 @@ a.contact-card:hover{ background: rgba(0,0,0,.28); border-color: rgba(255,255,25
 
     <ul class="filelist" id="filelist" aria-live="polite"></ul>
 
+    <!-- Cloudflare Turnstile CAPTCHA — bot protection -->
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAADIDea863zFYf5q_" data-theme="light" data-callback="onTurnstileSuccess" data-expired-callback="onTurnstileExpired" style="margin:12px 0"></div>
+
     <div class="upload__actions">
       <div class="upload__status" id="submit-status" role="status" aria-live="polite"></div>
       <button class="btn btn--primary btn--lg" type="submit" id="submit-btn">
@@ -1692,7 +1697,7 @@ window.LSB_CONFIG = {
         metadata: {
           bucketName: cfg.BUCKET,
           objectName,
-          contentType: entry.file.type || "application/octet-stream",
+          contentType: entry.file.type || "application/pdf",
           cacheControl: "3600",
         },
         chunkSize: 6 * 1024 * 1024, // Supabase requires fixed 6MB chunks for TUS
@@ -1734,6 +1739,11 @@ window.LSB_CONFIG = {
     }
   }
 
+  // ── Turnstile CAPTCHA callbacks ─────────────────────────────────────────
+  let turnstileToken = null;
+  window.onTurnstileSuccess = (token) => { turnstileToken = token; };
+  window.onTurnstileExpired = () => { turnstileToken = null; };
+
   // ── Submit ──────────────────────────────────────────────────────────────
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -1741,6 +1751,13 @@ window.LSB_CONFIG = {
     if (!sb) {
       setStatus("Supabase not configured.", "err");
       toast("Supabase is not configured. Check config.js.", "err");
+      return;
+    }
+
+    // Check Turnstile token before allowing submission
+    if (!turnstileToken) {
+      setStatus("Please complete the security check first.", "err");
+      toast("Complete the CAPTCHA to continue.", "err");
       return;
     }
 
@@ -1797,7 +1814,7 @@ window.LSB_CONFIG = {
       //     Non-blocking from the user's POV: if email fails we still thank them.
       try {
         await sb.functions.invoke("send-lead-emails", {
-          body: { lead_id: inserted?.id },
+          body: { lead_id: inserted?.id, turnstile_token: turnstileToken },
         });
       } catch (mailErr) {
         console.warn("Email notification failed:", mailErr);
@@ -1809,6 +1826,9 @@ window.LSB_CONFIG = {
       form.reset();
       files.length = 0;
       renderFiles();
+      // Reset Turnstile for next submission
+      turnstileToken = null;
+      if (window.turnstile) window.turnstile.reset();
       submitBtn.innerHTML = "<span>Sent ✓</span>";
       setTimeout(() => {
         submitBtn.innerHTML = origLabel;
